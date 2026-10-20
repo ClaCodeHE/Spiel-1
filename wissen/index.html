@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Wissensfeed">
+  <title>Wissensfeed</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Feed -->
+    <section class="view" id="view-feed">
+      <header class="feedbar">
+        <button class="streak" id="streak-btn" aria-label="Lernserie"><span class="flame">🔥</span><b id="streak-count">0</b></button>
+        <nav class="chips" id="feed-chips"></nav>
+        <button class="ring" id="goal-ring" aria-label="Tagesziel">
+          <svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" class="ring-bg"/><circle cx="18" cy="18" r="15" class="ring-fg" id="ring-fg"/></svg>
+          <span id="goal-text">0</span>
+        </button>
+      </header>
+      <div class="feed" id="feed"></div>
+    </section>
+
+    <!-- Entdecken -->
+    <section class="view scroll" id="view-explore" hidden>
+      <div class="page">
+        <h1 class="h1">Entdecken</h1>
+        <label class="search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <input id="search" type="search" placeholder="Thema, Begriff, Ereignis suchen …" autocomplete="off">
+        </label>
+        <div id="search-results" class="results" hidden></div>
+        <div id="explore-main">
+          <h2 class="h2">Modi</h2>
+          <div class="modes" id="modes"></div>
+          <h2 class="h2">Kategorien</h2>
+          <div id="cat-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz-Sprint -->
+    <section class="view scroll" id="view-sprint" hidden>
+      <div class="page" id="sprint-start">
+        <h1 class="h1">Quiz-Sprint ⏱️</h1>
+        <p class="lead">60 Sekunden. So viele richtige Antworten wie möglich. Jede falsche Antwort kostet 5 Sekunden.</p>
+        <div class="best-box"><span>Rekord</span><b id="sprint-best">0</b></div>
+        <h2 class="h2">Kategorien</h2>
+        <div class="toggle-chips" id="sprint-cats"></div>
+        <button class="btn primary big" id="sprint-go">Los geht’s</button>
+      </div>
+      <div class="sprint-game" id="sprint-game" hidden>
+        <div class="sprint-top">
+          <button class="icon-btn" id="sprint-quit" aria-label="Abbrechen">✕</button>
+          <div class="sprint-timer"><div id="sprint-bar"></div></div>
+          <div class="sprint-score"><b id="sprint-score">0</b></div>
+        </div>
+        <div class="sprint-card" id="sprint-card"></div>
+      </div>
+      <div class="page" id="sprint-end" hidden></div>
+    </section>
+
+    <!-- Gespeichert -->
+    <section class="view scroll" id="view-saved" hidden>
+      <div class="page">
+        <h1 class="h1">Meine Sammlung</h1>
+        <div class="seg" id="saved-seg">
+          <button data-k="saved" class="on">🔖 Gespeichert</button>
+          <button data-k="liked">♥ Gefällt mir</button>
+          <button data-k="review">🔁 Wiederholen</button>
+        </div>
+        <div class="toggle-chips small" id="saved-cats"></div>
+        <div class="grid" id="saved-grid"></div>
+      </div>
+    </section>
+
+    <!-- Profil -->
+    <section class="view scroll" id="view-profile" hidden>
+      <div class="page" id="profile"></div>
+    </section>
+
+    <nav class="tabbar" id="tabbar">
+      <button data-view="feed" class="on" aria-label="Feed">
+        <svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Feed</span></button>
+      <button data-view="explore" aria-label="Entdecken">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg><span>Entdecken</span></button>
+      <button data-view="sprint" class="plus" aria-label="Quiz-Sprint">
+        <span class="plus-in">⚡</span></button>
+      <button data-view="saved" aria-label="Gespeichert">
+        <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg><span>Sammlung</span></button>
+      <button data-view="profile" aria-label="Profil">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>Profil</span></button>
+    </nav>
+
+    <div class="sheet-back" id="sheet-back" hidden></div>
+    <div class="sheet" id="sheet" aria-hidden="true"><div class="sheet-grip"></div><div id="sheet-body"></div></div>
+    <div class="toast" id="toast"></div>
+    <div class="overlay" id="onboarding" hidden></div>
+    <canvas id="confetti"></canvas>
+  </div>
+
+  <script src="js/data/politik-de.js"></script>
+  <script src="js/data/politik-welt.js"></script>
+  <script src="js/data/vwl-mikro.js"></script>
+  <script src="js/data/vwl-makro.js"></script>
+  <script src="js/data/geschichte-1.js"></script>
+  <script src="js/data/geschichte-2.js"></script>
+  <script src="js/data/bwl-1.js"></script>
+  <script src="js/data/bwl-2.js"></script>
+  <script src="js/data/finanzen-boerse.js"></script>
+  <script src="js/data/finanzen-privat.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
