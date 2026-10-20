@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#7b2ff7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Imposter">
+  <title>Imposter</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- 1. Spieler -->
+    <section class="screen" id="screen-players">
+      <header class="top">
+        <div class="logo">🕵️ <span>Imposter</span></div>
+        <p class="subtitle">Wer spielt mit?</p>
+      </header>
+      <div class="content">
+        <div class="counter-row">
+          <span class="label">Spieleranzahl</span>
+          <div class="stepper">
+            <button class="step" id="players-minus" aria-label="Spieler entfernen">−</button>
+            <span id="players-count">4</span>
+            <button class="step" id="players-plus" aria-label="Spieler hinzufügen">+</button>
+          </div>
+        </div>
+        <ul id="player-list" class="player-list"></ul>
+        <button class="btn ghost" id="add-player">+ Spieler hinzufügen</button>
+      </div>
+      <footer class="bottom">
+        <p class="hint-text" id="players-error"></p>
+        <button class="btn primary" id="players-confirm">Spieler bestätigen</button>
+      </footer>
+    </section>
+
+    <!-- 2. Spielmodus -->
+    <section class="screen" id="screen-setup" hidden>
+      <header class="top">
+        <button class="back" data-go="players" aria-label="Zurück">‹</button>
+        <p class="subtitle">Spielmodus</p>
+      </header>
+      <div class="content">
+        <div class="card-box">
+          <h3>Wie viele Imposter?</h3>
+          <div class="counter-row">
+            <span class="label" id="imposter-label">Imposter</span>
+            <div class="stepper">
+              <button class="step" id="imp-minus" aria-label="Weniger Imposter">−</button>
+              <span id="imp-count">1</span>
+              <button class="step" id="imp-plus" aria-label="Mehr Imposter">+</button>
+            </div>
+          </div>
+          <label class="switch-row">
+            <span>🎲 Zufällige Anzahl Imposter<small>Niemand weiß, wie viele es sind</small></span>
+            <input type="checkbox" id="random-imp"><i class="switch"></i>
+          </label>
+        </div>
+
+        <div class="card-box">
+          <h3>Kategorien</h3>
+          <div class="cat-actions">
+            <button class="chip-btn" id="cat-all">Alle</button>
+            <button class="chip-btn" id="cat-none">Keine</button>
+          </div>
+          <div id="cat-grid" class="cat-grid"></div>
+        </div>
+
+        <div class="card-box">
+          <h3>Tipp für Imposter</h3>
+          <label class="switch-row">
+            <span>💡 Imposter bekommen einen Tipp<small>Ein Wort, das nur um zwei Ecken passt</small></span>
+            <input type="checkbox" id="hints"><i class="switch"></i>
+          </label>
+        </div>
+
+        <div class="card-box">
+          <h3>Timer</h3>
+          <label class="switch-row">
+            <span>⏱️ Timer verwenden</span>
+            <input type="checkbox" id="timer-on"><i class="switch"></i>
+          </label>
+          <div class="counter-row" id="timer-row">
+            <span class="label">Dauer</span>
+            <div class="stepper">
+              <button class="step" id="time-minus" aria-label="Kürzer">−</button>
+              <span id="time-value">3:00</span>
+              <button class="step" id="time-plus" aria-label="Länger">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="bottom">
+        <p class="hint-text" id="setup-error"></p>
+        <button class="btn primary" id="start-reveal">Spiel beginnen</button>
+      </footer>
+    </section>
+
+    <!-- 3. Karten verteilen -->
+    <section class="screen" id="screen-reveal" hidden>
+      <header class="top">
+        <button class="back" id="reveal-abort" aria-label="Abbrechen">✕</button>
+        <p class="subtitle" id="reveal-progress">Spieler 1 von 4</p>
+      </header>
+      <div class="content center">
+        <p class="pass-text">Gib das Handy an</p>
+        <h1 class="player-name" id="reveal-name">Name</h1>
+        <div class="swipe-area" id="reveal-area">
+          <div class="secret" id="reveal-secret"></div>
+          <div class="cover" id="reveal-cover">
+            <div class="cover-inner">
+              <div class="cover-icon">🕵️</div>
+              <div class="cover-name" id="reveal-cover-name">Name</div>
+              <div class="cover-hint"><span class="arrow">⬆</span>Karte hochziehen</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="bottom">
+        <p class="hint-text" id="reveal-info">Zieh die Karte hoch, um deinen Begriff zu sehen.</p>
+        <button class="btn primary" id="reveal-next" disabled>Weiter</button>
+      </footer>
+    </section>
+
+    <!-- 4. Spiel / Timer -->
+    <section class="screen" id="screen-play" hidden>
+      <header class="top">
+        <p class="subtitle">Das Spiel läuft!</p>
+      </header>
+      <div class="content center">
+        <div class="starter" id="starter">🎤 <b id="starter-name"></b> beginnt</div>
+        <div class="timer-wrap" id="timer-wrap">
+          <svg viewBox="0 0 200 200" class="ring">
+            <circle cx="100" cy="100" r="88" class="ring-bg"/>
+            <circle cx="100" cy="100" r="88" class="ring-fg" id="ring-fg"/>
+          </svg>
+          <div class="timer-text" id="timer-text">3:00</div>
+        </div>
+        <div class="timer-controls" id="timer-controls">
+          <button class="round" id="t-minus">−30s</button>
+          <button class="round big" id="t-toggle" aria-label="Pause">⏸</button>
+          <button class="round" id="t-plus">+30s</button>
+        </div>
+        <label class="switch-row compact">
+          <span>⏱️ Timer</span>
+          <input type="checkbox" id="play-timer-on"><i class="switch"></i>
+        </label>
+        <p class="no-timer" id="no-timer">Diskutiert und findet den Imposter! 🔎<br>Wenn ihr fertig seid, geht's zur Auflösung.</p>
+      </div>
+      <footer class="bottom">
+        <button class="btn primary" id="to-solution">Zur Auflösung</button>
+      </footer>
+    </section>
+
+    <!-- 5. Auflösung -->
+    <section class="screen" id="screen-solution" hidden>
+      <header class="top">
+        <p class="subtitle">Auflösung</p>
+      </header>
+      <div class="content center">
+        <p class="pass-text">Wer war der Imposter?</p>
+        <div class="swipe-area tall" id="solution-area">
+          <div class="secret" id="solution-secret"></div>
+          <div class="cover solution-cover" id="solution-cover">
+            <div class="cover-inner">
+              <div class="cover-icon">❓</div>
+              <div class="cover-name">Auflösung</div>
+              <div class="cover-hint"><span class="arrow">⬆</span>Karte hochziehen</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="bottom two">
+        <button class="btn ghost" id="sol-settings">Einstellungen</button>
+        <button class="btn primary" id="sol-again">Neue Runde</button>
+      </footer>
+    </section>
+
+  </div>
+
+  <div class="modal" id="confirm-modal" hidden>
+    <div class="modal-box">
+      <p id="confirm-text">Runde abbrechen?</p>
+      <div class="modal-actions">
+        <button class="btn ghost" id="confirm-no">Nein</button>
+        <button class="btn primary" id="confirm-yes">Ja</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/words/alltag.js"></script>
+  <script src="js/words/sport.js"></script>
+  <script src="js/words/geografie.js"></script>
+  <script src="js/words/natur.js"></script>
+  <script src="js/words/chemie.js"></script>
+  <script src="js/words/witzig.js"></script>
+  <script src="js/words/filme.js"></script>
+  <script src="js/words/tiere.js"></script>
+  <script src="js/words/stars.js"></script>
+  <script src="js/words/berufe.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
