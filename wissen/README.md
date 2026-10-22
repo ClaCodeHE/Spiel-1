@@ -1,7 +1,7 @@
 # 📚 Wissensfeed – Lernen im Swipe-Format
 
 Mobile Web-App (PWA) für die persönliche Weiterbildung: Politik, VWL, Geschichte, BWL und Finanzen
-in über 1.000 kurzen Slides – swipen wie bei TikTok, verstehen statt nur lesen.
+in rund 1.700 kurzen Slides – swipen wie bei TikTok, verstehen statt nur lesen.
 
 ## Funktionen
 - **Feed „Für dich“** mit Kategorien-Tabs; wischt man nach oben, kommt die nächste Slide.

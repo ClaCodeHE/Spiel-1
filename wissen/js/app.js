@@ -373,7 +373,7 @@ function revealChain(card, s, btn) {
     if (i) { html += `<div class="arrow" style="animation-delay:${d}ms">▼</div>`; d += 120; }
     html += `<div class="step" style="animation-delay:${d}ms">${fmt(st)}</div>`; d += 330;
   });
-  html += `<div class="explain" style="animation-delay:${d}ms;opacity:0;animation-fill-mode:forwards">${fmt(s.text)}</div>`;
+  html += `<div class="explain" style="opacity:0;animation:appear .4s ease-out ${d}ms forwards">${fmt(s.text)}</div>`;
   ch.innerHTML = html;
   const inner = $(".card-inner", card);
   setTimeout(() => inner.scrollTo({ top: Math.max(0, $(".q", card).offsetTop - 70), behavior: "smooth" }), 50);

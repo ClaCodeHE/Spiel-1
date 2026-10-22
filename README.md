@@ -36,4 +36,4 @@ Lokal testen: `python3 -m http.server` im Projektordner und `http://localhost:80
 
 ## 📚 Außerdem im Repository: Wissensfeed
 Im Ordner [`wissen/`](wissen/) liegt eine zweite App – ein TikTok-artiger Lernfeed zu Politik, VWL,
-Geschichte, BWL und Finanzen mit über 1.000 Slides. Details in [`wissen/README.md`](wissen/README.md).
+Geschichte, BWL und Finanzen mit rund 1.700 Slides. Details in [`wissen/README.md`](wissen/README.md).
