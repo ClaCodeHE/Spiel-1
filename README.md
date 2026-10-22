@@ -31,3 +31,9 @@ Dann die Seite auf dem Handy öffnen und
 - **Android (Chrome)**: Menü ⋮ → „App installieren“ / „Zum Startbildschirm hinzufügen“
 
 Lokal testen: `python3 -m http.server` im Projektordner und `http://localhost:8000` öffnen.
+
+---
+
+## 📚 Außerdem im Repository: Wissensfeed
+Im Ordner [`wissen/`](wissen/) liegt eine zweite App – ein TikTok-artiger Lernfeed zu Politik, VWL,
+Geschichte, BWL und Finanzen mit rund 1.700 Slides. Details in [`wissen/README.md`](wissen/README.md).
