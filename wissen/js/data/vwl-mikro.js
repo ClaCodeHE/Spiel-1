@@ -586,10 +586,6 @@
     explain: "**Effizienzlöhne**: Ein Lohn über Marktniveau senkt Fluktuation und Einarbeitungskosten, steigert Motivation und lockt bessere Bewerber. Bei Ford sank die extrem hohe Fluktuation am Fließband danach deutlich. Nebeneffekt: Höhere Löhne können zu unfreiwilliger Arbeitslosigkeit beitragen." },
 
   // ── Ökonomen & Ideen ──
-  { id: "vmi-138", cat: "vwl", topic: "Ökonomen", type: "event", emoji: "🫱", level: 1, year: "1776",
-    title: "Adam Smith: ‚Der Wohlstand der Nationen‘",
-    text: "Smith beschreibt, wie Eigeninteresse über Märkte dem Gemeinwohl dienen kann – das Bild der ‚unsichtbaren Hand‘. Das Buch gilt als Gründungswerk der modernen Volkswirtschaftslehre.",
-    more: "Berühmt: ‚Nicht vom Wohlwollen des Metzgers, Brauers oder Bäckers erwarten wir unser Abendessen, sondern davon, dass sie ihre eigenen Interessen wahrnehmen.‘ Oft übersehen: Smith warnte vor Preisabsprachen der Kaufleute und schrieb zuvor die ‚Theorie der ethischen Gefühle‘ (1759). Ein Prediger reiner Gier war er nicht." },
   { id: "vmi-139", cat: "vwl", topic: "Ökonomen", type: "truefalse", emoji: "✋", level: 1,
     q: "Im ‚Wohlstand der Nationen‘ verwendet Adam Smith den Ausdruck ‚unsichtbare Hand‘ nur ein einziges Mal.",
     answer: true,

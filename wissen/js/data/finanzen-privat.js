@@ -131,10 +131,6 @@
     explain: "Die meisten unterschätzen ihre Ausgaben – besonders Abos, Lieferdienste und Kleinbeträge. Schon 2–3 Monate Tracking zeigen, wo das Geld wirklich hingeht. Das ist die Basis für jede bewusste Sparentscheidung." },
 
   // ── Opportunitätskosten ──
-  { id: "fpr-031", cat: "finanzen", topic: "Opportunitätskosten", type: "flashcard", emoji: "🔀", level: 1,
-    term: "Opportunitätskosten",
-    def: "Der entgangene Nutzen der besten Alternative, auf die man verzichtet. Jeder Euro, den du ausgibst, kann nicht mehr investiert werden und wachsen.",
-    example: "Ein 30.000-€-Neuwagen statt eines 15.000-€-Gebrauchten: Die 15.000 € Differenz wären bei 7 % in 20 Jahren rund 58.000 €." },
   { id: "fpr-032", cat: "finanzen", topic: "Opportunitätskosten", type: "quiz", emoji: "☕", level: 2,
     q: "3 € täglich für Coffee-to-go sind rund 90 € im Monat. Was ergäben 90 €/Monat, 30 Jahre lang zu 7 % angelegt, ungefähr?",
     options: ["Ca. 32.000 €", "Ca. 55.000 €", "Ca. 106.000 €", "Ca. 250.000 €"], answer: 2,
